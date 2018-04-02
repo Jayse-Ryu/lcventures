@@ -1,0 +1,96 @@
+/*
+===============================================
+  Main page, Video Start
+===============================================
+*/
+
+/* Video wrap -> Video basket -> Video(iFrame) */
+.video_wrap {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -100;
+}
+
+.video_basket {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  object-fit: cover;
+  background-color: black;
+  opacity: 0.4;
+  z-index: -50;
+}
+
+.video {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  pointer-events: none;
+  object-fit: cover;
+  z-index: -70;
+}
+
+/* Stretch Video */
+@media (min-aspect-ratio: 16/9) {
+  .video_basket {
+    height: 300%;
+    top: -100%;
+  }
+}
+@media (max-aspect-ratio: 16/9) {
+  .video_basket {
+    width: 300%;
+    left: -100%;
+  }
+}
+
+/*
+===============================================
+  Video End
+===============================================
+*/
+
+/* Main Text on Video */
+.main_title {
+  position: relative;
+  top: -100vh;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  padding-top: calc(50vh - 25px);
+  color: yellow;
+  text-align: center;
+  font-size: 50px;
+  font-weight: lighter;
+  word-break: keep-all;
+  white-space: pre-line;
+}
+
+/* Change Text size belongs to Web width */
+@media (max-width: 1000px) {
+  .main_title {
+    position: relative;
+    top: -100vh;
+    left: 0;
+    z-index: -40;
+    width: 100%;
+    height: 100vh;
+    padding-top: calc(50vh - 25px);
+    color: yellow;
+    text-align: center;
+    font-size: 28px;
+    word-break: keep-all;
+    white-space: pre-line;
+  }
+}
