@@ -1,0 +1,21 @@
+{
+  "name": "lcven",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "jayseryu <dgkim723@hotmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Jayse-Ryu/lcventures",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "^3.3.1",
+    "bootstrap": "^4.0.0"
+  }
+}

@@ -1,13 +1,19 @@
 var gulp            = require('gulp'),
+    bower           = require('gulp-bower'),
     sass            = require('gulp-sass'),
     concat          = require('gulp-concat'),
     autoprefixer    = require('gulp-autoprefixer'),
     uglify          = require('gulp-uglify'),
     minifyjs        = require('gulp-js-minify'),
-    browserSync     = require('browser-sync'),
     sourcemaps      = require('gulp-sourcemaps'),
     imagemin        = require('gulp-imagemin'),
+    htmlImport      = require('gulp-html-import'),
+    htmlmin         = require('gulp-htmlmin'),
+    browserSync     = require('browser-sync').create(),
     config = {
+        bowerDir: './bower_components',
+        srcDir: './',
+        distDir: './dist',
         bootstrapDir    : './bower_components/bootstrap-sass',
         bootstrapJs     : './bower_components/bootstrap/dist/js',
         jqueryJs        : './bower_components/jquery/dist',
@@ -15,6 +21,37 @@ var gulp            = require('gulp'),
         datePicker      : './bower_components/bootstrap-datepicker/dist/js',
         publicDir       : './public'
     };
+
+
+// Call bower?
+gulp.task('bower', function () {
+    return bower()
+        .pipe(gulp.dest(config.bowerDir))
+});
+
+
+// Compress and Import html
+gulp.task('html_import', function () {
+    gulp.src('index.html')
+        .pipe(htmlImport('./html/'))
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('dist'));
+
+    gulp.src('./html/page_1_company.html')
+        .pipe(htmlImport('./html/'))
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('dist/html'));
+});
+
+
+// Font files to dist
+gulp.task('fonts', function () {
+    return gulp.src([
+        config.bowerDir + '/bootstrap-sass/assets/fonts/**/*',
+        config.bowerDir + '/noto-sans-kr/fonts/**/*'
+    ])
+        .pipe(gulp.dest(config.distDir + '/fonts'));
+});
 
 
 // Compile scss to css ++ Combine, Compress, Auto Prefix
@@ -61,11 +98,15 @@ gulp.task('sass_common', function () {
 gulp.task('js_common', function () {
 
     gulp.src([
-        'js/**/common.js',
-        config.bootstrapJs + '/bootstrap.js',
-        config.jqueryJs + '/jquery.js',
+        config.srcDir + 'js/**/common.js',
+        config.jqueryJs + 'jquery.js',
         config.jqueryLazy + 'jquery.lazy.js',
+        config.bootstrapJs + '/index.js',
         config.datePicker + '/bootstrap-datepicker.js'
+        //config.bowerDir + '/jquery/dist/jquery.js'
+        //config.bowerDir + '/jquery-validation/dist/jquery.validate.js',
+        //config.bowerDir + '/jquery-validation/dist/additional-methods.js'
+        //config.bowerDir + '/owl.carousel/dist/owl.carousel.min.js'
     ])
         .pipe(sourcemaps.init())
         .pipe(concat('common.js'))
@@ -116,13 +157,6 @@ gulp.task('images_comp', function () {
 });
 
 
-// Copy Font files to dist
-gulp.task('fonts', function() {
-    gulp.src('font/*')
-        .pipe(gulp.dest('dist/font'))
-});
-
-
 // Copy Video files to dist
 gulp.task('videos', function () {
     gulp.src('videos/*')
@@ -132,18 +166,31 @@ gulp.task('videos', function () {
 
 // Linking browser sync to these directions
 gulp.task('browser-sync', function() {
-    browserSync.init(["dist/css/*.css", "dist/js/*.js", "dist/images/*", "*.html"], {
-
+    browserSync.init(["dist/css/*.css", "dist/js/*.js", "dist/images/*", "dist/html/*.html"], {
         server: {
-            baseDir: "./"
+            //baseDir: "./"
+            baseDir: config.distDir
         }
     });
 });
 
 
 // Default running gulp ++ Watch without Fonts, Videos
-gulp.task('default', ['sass_common', 'js_common', 'images_comp', 'fonts', 'videos', 'browser-sync'], function () {
-    gulp.watch("scss/**/*.scss", ['sass_common']);
-    gulp.watch("js/**/*.js", ['js_common']);
-    gulp.watch("images/*", ['images_comp']);
-});
+gulp.task ('default',
+    [
+        'fonts',
+        'html_import',
+        'sass_common',
+        'js_common',
+        'images_comp',
+        'videos',
+        'browser-sync'
+    ],
+    function () {
+        gulp.watch("*.html", ['html_import']);
+        gulp.watch("html/*.html", ['html_import']);
+        gulp.watch("scss/**/*.scss", ['sass_common']);
+        gulp.watch("js/**/*.js", ['js_common']);
+        gulp.watch("images/*", ['images_comp']);
+    }
+);

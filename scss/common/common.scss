@@ -441,6 +441,17 @@ a {
   text-decoration: none;
 }
 
+p {
+  padding: 0;
+  margin: 0;
+}
+
+ul, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 ::selection {
   color: white;
   background: yellow;
@@ -461,7 +472,7 @@ a {
 body {
   background-color: #121212;
   font: 1rem/1.1 "Montserrat", sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 /* Header Start (logo, button) */
@@ -472,11 +483,11 @@ header {
   width: 100%;
   padding: 25px;
   margin-bottom: -50px;
-  transition: all 250ms ease-in-out;
+  transition: all 350ms cubic-bezier(.83,.01,.46,.86)
 }
 
 .head_logo {
-  position: relative;
+  position: fixed;
   width: 150px;
   height: 150px;
   float: left;
@@ -487,7 +498,7 @@ header {
   color: yellow;
   border: 3px solid yellow;
   z-index: 5000;
-  transition: all 250ms ease-in-out;
+  transition: all 350ms cubic-bezier(.83,.01,.46,.86);
   &:hover {
     border: 3px solid white;
     background-color: rgba(25, 25, 25, 0.6);
@@ -509,11 +520,12 @@ header {
   float: right;
   color: yellow;
   z-index: 5000;
+  right: 75px;
 }
 
 .button_middle_inner {
   color: yellow;
-  transition: all 250ms ease-in-out;
+  transition: all 350ms cubic-bezier(.83,.01,.46,.86);
   &:hover {
     color: white;
   }
@@ -527,18 +539,18 @@ header {
   font-size: 35px;
   line-height: 53px;
   color: yellow;
-  transition: all 250ms ease-in-out;
+  transition: all 350ms cubic-bezier(.83,.01,.46,.86);
 }
 .button_menu {
-  position: relative;
+  position: fixed;
   width: 50px;
   height: 50px;
-  float: right;
   vertical-align: top;
   text-align: center;
   cursor: pointer;
+  margin-left: calc(100% - 100px);
   z-index: 5000;
-  transition: all 250ms ease-in-out;
+  transition: all 350ms cubic-bezier(.83,.01,.46,.86);
   &:hover:before {
     color: white;
   }
@@ -553,28 +565,32 @@ header:after {
 
 /* Hidden Navigation CSS */
 .navigation_wrap {
-  position: absolute;
+  position: fixed;
   width: 250px;
   height: 100vh;
   background-color: #121212;
   top: 0;
   right: -250px;
   text-align: center;
-  transition: all 250ms ease-in-out;
+  transition: all 350ms cubic-bezier(.83,.01,.46,.86);
   padding: 25px 0;
+  overflow-y: auto;
 }
 
 .nav_category {
   width: 90%;
-  margin: 10px auto;
+  margin: 20px auto 20px auto;
   text-align: left;
   font-size: 18px;
   line-height: 25px;
-  div {
+  li {
+    transition: all 350ms cubic-bezier(.83,.01,.46,.86);
+    margin: 8px 0;
     a {
       display: block;
       padding: 0 8px;
       color: #efefef;
+      transition: all 350ms cubic-bezier(.83,.01,.46,.86);
       &:hover {
         color: yellow;
       }
@@ -585,12 +601,46 @@ header:after {
     }
   }
 }
+
+.menu_division {
+  width: 25px;
+  height: 1px;
+  background-color: #c1c1c1;
+  margin: 0 20px;
+}
+
+.menu_close:before {
+  content: '\002b';
+  font-size: 35px;
+  color: #a1a1a1;
+  transition: all 350ms cubic-bezier(.83,.01,.46,.86);
+}
+.menu_close {
+  width: 30px;
+  height: 30px;
+  line-height: 35px;
+  border-radius: 100px;
+  transform: rotate(45deg);
+  cursor: pointer;
+  float: right;
+  margin: -15px 10px -5px auto;
+  transition: all 350ms cubic-bezier(.83,.01,.46,.86);
+  &:hover {
+    transform: rotate(315deg);
+  }
+  &:hover:before {
+    color: #efefef;
+  }
+}
+
 /* Hidden Navigation Ended */
 
-#main {
-  position: relative;
+#main_role {
+  position: absolute;
+  top: 0;
   left: 0;
-  transition: all 250ms ease-in-out;
+  width: 100%;
+  transition: all 350ms cubic-bezier(.83,.01,.46,.86)
 }
 
 /*
@@ -621,10 +671,11 @@ Media query
     width: 75px;
     height: 50px;
     line-height: 53px;
+    right: 40px;
     float: right;
     color: yellow;
   }
-}
+}/*=*/
 
 /* When it too much small hidden middle buttons */
 @media (max-width: 300px) {
@@ -644,17 +695,12 @@ Media query
     }
   }
   .button_middle {
+    width: 75px;
+    height: 50px;
+    line-height: 53px;
+    right: 40px;
+    float: right;
+    color: yellow;
     visibility: hidden;
   }
-}
-
-/* Testtttttt */
-.test {
-  position: absolute;
-  top: 200px;
-  left: 200px;
-  width: 500px;
-  height: 500px;
-  background: aquamarine;
-  z-index: 10000;
-}
+}/*=*/
