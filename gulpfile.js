@@ -9,6 +9,7 @@ var gulp            = require('gulp'),
     minifyjs        = require('gulp-js-minify'),
     sourcemaps      = require('gulp-sourcemaps'),
     imagemin        = require('gulp-imagemin'),
+    rev             = require('gulp-rev'),
     browserSync     = require('browser-sync').create(),
     config = {
         srcDir          : './',
@@ -93,7 +94,8 @@ gulp.task('fonts', function () {
         config.bowerDir + '/bootstrap-sass/assets/fonts/**/*',
         config.bowerDir + '/noto-sans-kr/fonts/**/*'
     ])
-        .pipe(gulp.dest(config.distDir + '/fonts'));
+        .pipe(gulp.dest(config.distDir + '/fonts'))
+        .pipe(rev());
 });
 
 
@@ -109,7 +111,8 @@ gulp.task('sass_common', function () {
         }))
         .pipe(sass({outputStyle: 'compressed'}))
         .pipe(concat('common.css'))
-        .pipe(gulp.dest('dist/css'));
+        .pipe(gulp.dest('dist/css'))
+        .pipe(rev());
 
     gulp.src([
         "scss/**/util1.scss",
@@ -133,7 +136,8 @@ gulp.task('sass_common', function () {
         }))
         .pipe(sass({outputStyle: 'compressed'}))
         .pipe(concat('main.css'))
-        .pipe(gulp.dest('dist/css'));
+        .pipe(gulp.dest('dist/css'))
+        .pipe(rev());
 
     gulp.src(['scss/**/util2.scss', 'scss/**/login.scss', 'scss/**/register.scss'])
         .pipe(sass({
@@ -145,7 +149,8 @@ gulp.task('sass_common', function () {
         }))
         .pipe(sass({outputStyle: 'compressed'}))
         .pipe(concat('sign.css'))
-        .pipe(gulp.dest('dist/css'));
+        .pipe(gulp.dest('dist/css'))
+        .pipe(rev());
 });
 
 
@@ -167,7 +172,8 @@ gulp.task('js_common', function () {
         .pipe(uglify())
         .pipe(minifyjs())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/js'));
+        .pipe(gulp.dest('dist/js'))
+        .pipe(rev());
 
     gulp.src([
         'js/**/main.js',
@@ -178,7 +184,8 @@ gulp.task('js_common', function () {
         .pipe(uglify())
         .pipe(minifyjs())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/js'));
+        .pipe(gulp.dest('dist/js'))
+        .pipe(rev());
 
     gulp.src([
         'js/**/detail.js',
@@ -189,7 +196,8 @@ gulp.task('js_common', function () {
         .pipe(uglify())
         .pipe(minifyjs())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/js'));
+        .pipe(gulp.dest('dist/js'))
+        .pipe(rev());
 });
 
 
@@ -207,7 +215,8 @@ gulp.task('images_comp', function () {
                 ]
             })
         ]))
-        .pipe(gulp.dest('dist/images'));
+        .pipe(gulp.dest('dist/images'))
+        .pipe(rev());
 });
 
 
@@ -215,6 +224,7 @@ gulp.task('images_comp', function () {
 gulp.task('videos', function () {
     gulp.src('videos/*')
         .pipe(gulp.dest('dist/videos'))
+        .pipe(rev());
 });
 
 

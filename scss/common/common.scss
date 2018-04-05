@@ -574,6 +574,7 @@ header:after {
   text-align: center;
   transition: all 350ms cubic-bezier(.83,.01,.46,.86);
   padding: 25px 0;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
@@ -612,24 +613,22 @@ header:after {
   margin: 0 20px;
 }
 
-.menu_close:before {
-  content: '\002b';
-  font-size: 35px;
-  color: #a1a1a1;
-  //transition: all 350ms cubic-bezier(.83,.01,.46,.86);
-}
 .menu_close {
   width: 30px;
   height: 30px;
-  line-height: 35px;
+  line-height: 30px;
   border-radius: 100px;
-  transform: rotate(45deg);
   cursor: pointer;
   float: right;
-  margin: -15px 10px -5px auto;
+  background-image: url("/images/close_btn.png");
+  background-position: 50% 50%;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  filter: invert(80%);
+  margin: -15px 15px 0 0;
   transition: all 350ms cubic-bezier(.83,.01,.46,.86);
   &:hover {
-    transform: rotate(315deg);
+    transform: rotate(270deg);
   }
   &:hover:before {
     color: #efefef;
@@ -671,7 +670,7 @@ Media query
   }
 
   .button_middle {
-    width: 75px;
+    width: 90px;
     height: 50px;
     line-height: 53px;
     right: 40px;
@@ -681,7 +680,7 @@ Media query
 }/*=*/
 
 /* When it too much small hidden middle buttons */
-@media (max-width: 300px) {
+@media (max-width: 500px) {
   .head_logo {
     width: 50px;
     height: 50px;
@@ -698,12 +697,12 @@ Media query
     }
   }
   .button_middle {
-    width: 75px;
-    height: 50px;
-    line-height: 53px;
-    right: 40px;
-    float: right;
-    color: yellow;
+    //width: 75px;
+    //height: 50px;
+    //line-height: 53px;
+    //right: 40px;
+    //float: right;
+    //color: yellow;
     visibility: hidden;
   }
 }/*=*/
