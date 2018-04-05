@@ -1,33 +1,33 @@
 var gulp            = require('gulp'),
+    htmlImport      = require('gulp-html-import'),
+    htmlmin         = require('gulp-htmlmin'),
     bower           = require('gulp-bower'),
     sass            = require('gulp-sass'),
-    concat          = require('gulp-concat'),
     autoprefixer    = require('gulp-autoprefixer'),
+    concat          = require('gulp-concat'),
     uglify          = require('gulp-uglify'),
     minifyjs        = require('gulp-js-minify'),
     sourcemaps      = require('gulp-sourcemaps'),
     imagemin        = require('gulp-imagemin'),
-    htmlImport      = require('gulp-html-import'),
-    htmlmin         = require('gulp-htmlmin'),
     browserSync     = require('browser-sync').create(),
     config = {
-        bowerDir: './bower_components',
-        srcDir: './',
-        distDir: './dist',
-        bootstrapDir    : './bower_components/bootstrap-sass',
-        bootstrapJs     : './bower_components/bootstrap/dist/js',
+        srcDir          : './',
+        distDir         : './dist',
+        publicDir       : './public',
+        bowerDir        : './bower_components',
         jqueryJs        : './bower_components/jquery/dist',
         jqueryLazy      : './bower_components/jquery-lazy',
-        datePicker      : './bower_components/bootstrap-datepicker/dist/js',
-        publicDir       : './public'
+        bootstrapDir    : './bower_components/bootstrap-sass',
+        bootstrapJs     : './bower_components/bootstrap/dist/js',
+        datePicker      : './bower_components/bootstrap-datepicker/dist/js'
     };
 
 
-// Call bower?
-gulp.task('bower', function () {
-    return bower()
-        .pipe(gulp.dest(config.bowerDir))
-});
+// Keep bower
+// gulp.task('bower', function () {
+//     return bower()
+//         .pipe(gulp.dest(config.bowerDir))
+// });
 
 
 // Compress and Import html
@@ -40,7 +40,8 @@ gulp.task('html_import', function () {
     gulp.src('./html/page_1_company.html')
         .pipe(htmlImport('./html/'))
         .pipe(htmlmin({collapseWhitespace: true}))
-        .pipe(gulp.dest('dist/html'));
+        .pipe(concat('page_1.html'))
+        .pipe(gulp.dest('dist/html'))
 });
 
 
@@ -103,7 +104,6 @@ gulp.task('js_common', function () {
         config.jqueryLazy + 'jquery.lazy.js',
         config.bootstrapJs + '/index.js',
         config.datePicker + '/bootstrap-datepicker.js'
-        //config.bowerDir + '/jquery/dist/jquery.js'
         //config.bowerDir + '/jquery-validation/dist/jquery.validate.js',
         //config.bowerDir + '/jquery-validation/dist/additional-methods.js'
         //config.bowerDir + '/owl.carousel/dist/owl.carousel.min.js'
@@ -153,7 +153,7 @@ gulp.task('images_comp', function () {
                 ]
             })
         ]))
-        .pipe(gulp.dest('dist/images'))
+        .pipe(gulp.dest('dist/images'));
 });
 
 

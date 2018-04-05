@@ -590,7 +590,7 @@ header:after {
       display: block;
       padding: 0 8px;
       color: #efefef;
-      transition: all 350ms cubic-bezier(.83,.01,.46,.86);
+      //transition: all 350ms cubic-bezier(.83,.01,.46,.86);
       &:hover {
         color: yellow;
       }
@@ -600,6 +600,9 @@ header:after {
       background-color: #313131;
     }
   }
+}
+.selected {
+  color: yellow !important;
 }
 
 .menu_division {
@@ -613,7 +616,7 @@ header:after {
   content: '\002b';
   font-size: 35px;
   color: #a1a1a1;
-  transition: all 350ms cubic-bezier(.83,.01,.46,.86);
+  //transition: all 350ms cubic-bezier(.83,.01,.46,.86);
 }
 .menu_close {
   width: 30px;
