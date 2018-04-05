@@ -24,10 +24,10 @@ var gulp            = require('gulp'),
 
 
 // Keep bower
-// gulp.task('bower', function () {
-//     return bower()
-//         .pipe(gulp.dest(config.bowerDir))
-// });
+gulp.task('bower', function () {
+    return bower()
+        .pipe(gulp.dest(config.bowerDir))
+});
 
 
 // Compress and Import html
@@ -41,7 +41,49 @@ gulp.task('html_import', function () {
         .pipe(htmlImport('./html/'))
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(concat('page_1.html'))
-        .pipe(gulp.dest('dist/html'))
+        .pipe(gulp.dest('dist/html'));
+
+    gulp.src('./html/page_2_project.html')
+        .pipe(htmlImport('./html/'))
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(concat('page_2.html'))
+        .pipe(gulp.dest('dist/html'));
+
+    gulp.src('./html/page_3_news.html')
+        .pipe(htmlImport('./html/'))
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(concat('page_3.html'))
+        .pipe(gulp.dest('dist/html'));
+
+    gulp.src('./html/page_4_people.html')
+        .pipe(htmlImport('./html/'))
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(concat('page_4.html'))
+        .pipe(gulp.dest('dist/html'));
+
+    gulp.src('./html/page_5_location.html')
+        .pipe(htmlImport('./html/'))
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(concat('page_5.html'))
+        .pipe(gulp.dest('dist/html'));
+
+    gulp.src('./html/page_6_contact.html')
+        .pipe(htmlImport('./html/'))
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(concat('page_6.html'))
+        .pipe(gulp.dest('dist/html'));
+
+    gulp.src('./html/page_7_recruit.html')
+        .pipe(htmlImport('./html/'))
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(concat('page_7.html'))
+        .pipe(gulp.dest('dist/html'));
+
+    gulp.src('./html/page_8_consult.html')
+        .pipe(htmlImport('./html/'))
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(concat('page_8.html'))
+        .pipe(gulp.dest('dist/html'));
 });
 
 
@@ -69,7 +111,7 @@ gulp.task('sass_common', function () {
         .pipe(concat('common.css'))
         .pipe(gulp.dest('dist/css'));
 
-    gulp.src(['scss/**/util1.scss', 'scss/**/main.scss', 'scss/**/detail.scss'])
+    gulp.src(['scss/**/util1.scss', 'scss/**/main.scss', 'scss/**/detail.scss', "scss/**/page_1.scss"])
         .pipe(sass({
             includePaths: ['scss', config.bootstrapDir + '/assets/stylesheets']
         }))
@@ -101,9 +143,9 @@ gulp.task('js_common', function () {
     gulp.src([
         config.srcDir + 'js/**/common.js',
         config.jqueryJs + 'jquery.js',
-        config.jqueryLazy + 'jquery.lazy.js',
+        //config.jqueryLazy + 'jquery.lazy.js',
         config.bootstrapJs + '/index.js',
-        config.datePicker + '/bootstrap-datepicker.js'
+        //config.datePicker + '/bootstrap-datepicker.js'
         //config.bowerDir + '/jquery-validation/dist/jquery.validate.js',
         //config.bowerDir + '/jquery-validation/dist/additional-methods.js'
         //config.bowerDir + '/owl.carousel/dist/owl.carousel.min.js'

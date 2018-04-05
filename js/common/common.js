@@ -9,12 +9,23 @@ Common Js. Header, Navigation, Menu Etc.
 var get_location = (function () {
 
     var nav_flag = document.getElementById("navigation_num").value;
+    document.getElementById('nav_' + nav_flag).setAttribute("class", "selected");
 
-    if(nav_flag != 0) {
-        document.getElementById('nav_' + nav_flag).setAttribute("href", "page_" + nav_flag + ".html");
-        document.getElementById('nav_' + nav_flag).setAttribute("class", "selected");
+    /* If location is 0 (home), set itself class, href. If not, change all of nav location for right directory */
+    if(nav_flag == 0) {
+
+        document.getElementById('nav_' + nav_flag).setAttribute("href", "index.html");
+
     } else {
-        document.getElementById('nav_' + nav_flag).setAttribute("class", "selected");
+
+        var long = document.getElementsByClassName("nav_a").length;
+
+        for(var i = 1; i <= long; i++) {
+
+            document.getElementById('nav_' + i).setAttribute("href", "page_" + i + ".html");
+
+        }
+
     }
 
 })();
