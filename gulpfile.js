@@ -111,7 +111,19 @@ gulp.task('sass_common', function () {
         .pipe(concat('common.css'))
         .pipe(gulp.dest('dist/css'));
 
-    gulp.src(['scss/**/util1.scss', 'scss/**/main.scss', 'scss/**/detail.scss', "scss/**/page_1.scss"])
+    gulp.src([
+        "scss/**/util1.scss",
+        "scss/**/main.scss",
+        "scss/**/detail.scss",
+        "scss/**/page_1.scss",
+        "scss/**/page_2.scss",
+        "scss/**/page_3.scss",
+        "scss/**/page_4.scss",
+        "scss/**/page_5.scss",
+        "scss/**/page_6.scss",
+        "scss/**/page_7.scss",
+        "scss/**/page_8.scss"
+    ])
         .pipe(sass({
             includePaths: ['scss', config.bootstrapDir + '/assets/stylesheets']
         }))
