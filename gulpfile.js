@@ -9,6 +9,7 @@ var gulp            = require('gulp'),
     minifyjs        = require('gulp-js-minify'),
     sourcemaps      = require('gulp-sourcemaps'),
     imagemin        = require('gulp-imagemin'),
+    babel           = require('gulp-babel'),
     rev             = require('gulp-rev'),
     browserSync     = require('browser-sync').create(),
     config = {
@@ -160,15 +161,18 @@ gulp.task('js_common', function () {
     gulp.src([
         config.srcDir + 'js/**/common.js',
         config.jqueryJs + 'jquery.js',
-        //config.jqueryLazy + 'jquery.lazy.js',
-        config.bootstrapJs + '/index.js',
-        //config.datePicker + '/bootstrap-datepicker.js'
-        //config.bowerDir + '/jquery-validation/dist/jquery.validate.js',
-        //config.bowerDir + '/jquery-validation/dist/additional-methods.js'
-        //config.bowerDir + '/owl.carousel/dist/owl.carousel.min.js'
+        /*config.jqueryLazy + 'jquery.lazy.js',*/
+        config.bootstrapJs + '/index.js'
+        /*config.datePicker + '/bootstrap-datepicker.js'*/
+        /*config.bowerDir + '/jquery-validation/dist/jquery.validate.js',*/
+        /*config.bowerDir + '/jquery-validation/dist/additional-methods.js'*/
+        /*config.bowerDir + '/owl.carousel/dist/owl.carousel.min.js'*/
     ])
         .pipe(sourcemaps.init())
         .pipe(concat('common.js'))
+        .pipe(babel({
+           presets: ['env']
+        }))
         .pipe(uglify())
         .pipe(minifyjs())
         .pipe(sourcemaps.write())
@@ -181,6 +185,9 @@ gulp.task('js_common', function () {
     ])
         .pipe(sourcemaps.init())
         .pipe(concat('main.js'))
+        .pipe(babel({
+           presets: ['env']
+        }))
         .pipe(uglify())
         .pipe(minifyjs())
         .pipe(sourcemaps.write())
@@ -193,6 +200,9 @@ gulp.task('js_common', function () {
     ])
         .pipe(sourcemaps.init())
         .pipe(concat('detail.js'))
+        .pipe(babel({
+            presets: ['env']
+        }))
         .pipe(uglify())
         .pipe(minifyjs())
         .pipe(sourcemaps.write())

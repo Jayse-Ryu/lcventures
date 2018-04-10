@@ -454,7 +454,7 @@ ul, li {
 
 ::selection {
   color: white;
-  background: yellow;
+  background: rgba(255,255,0,0.7);
 }
 
 /*
@@ -576,6 +576,7 @@ header:after {
   padding: 25px 0;
   overflow-x: hidden;
   overflow-y: auto;
+  box-shadow: inset 25px 0px 20px -20px rgba(0,0,0,0.5);
 }
 
 .nav_category {

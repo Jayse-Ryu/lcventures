@@ -21,10 +21,11 @@ var get_location = (function () {
         var long = document.getElementsByClassName("nav_a").length;
 
         for(var i = 1; i <= long; i++) {
-
             document.getElementById('nav_' + i).setAttribute("href", "page_" + i + ".html");
-
         }
+
+        document.getElementById("nav_mid_2").setAttribute("href", "page_2.html");
+        document.getElementById("nav_mid_7").setAttribute("href", "page_7.html");
 
     }
 
